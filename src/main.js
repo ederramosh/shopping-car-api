@@ -1,14 +1,22 @@
 import { getAllProducts } from "./apis/products-api";
 
-const listProducts = document.querySelector('.listProducts');
-
+let listProducts = document.querySelector('.listProducts');
 
 document.querySelector('.getProducts').addEventListener('click', async () => {
   const productsArray = await getAllProducts();
   
   productsArray.forEach(product => {
     console.log(product);
-    //aca puede ir el scripting para el DOM para pasarselo a listProducts
+    //solo es de meterle css
+    listProducts.innerHTML += `
+      <div>
+        <img src=${product.image} alt=${product.id} >
+        <h2>${product.title}</h2>
+        <p>${product.description}</p>
+        <h4>${product.price}</h4>
+      </div>
+    `
   });
 
 })
+
