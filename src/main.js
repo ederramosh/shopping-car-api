@@ -8,7 +8,6 @@ import { getAllProducts } from "./apis/products-api";
 
 // Crear banners promocionales
 //Este carrusel no utiliza el API, son imagines prediseñadas.
-
 const promoBanners = [
   {
     img: "https://res.cloudinary.com/daoy46bpe/image/upload/v1750384038/promocar3_hfabs3.png",
@@ -87,6 +86,7 @@ if (mainContainer && mainContainer.parentNode) {
 //FIN DEL CARRUSEL DE IMAGENES.
 
 
+// FETCH DE getAllProducts CONSEGUIR DE TODOS LOS PRODUCTOS AQUI, USEN PARA SACAR LA INFORMACION
 getAllProducts().then(products => {
   console.log(products);
 
