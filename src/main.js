@@ -1,11 +1,10 @@
-import './style.css';
-import { getAllProducts, getAllUsers } from "./products-api";
+import { getAllProducts, getAllUsers } from "./products-api.js";
 
 let listProducts = document.querySelector('.listProducts');
 
 document.querySelector('.getProducts').addEventListener('click', async () => {
-  const productsArray = await getAllProducts();
   console.log("hace click");
+  const productsArray = await getAllProducts();
   
   
   productsArray.forEach(product => {
