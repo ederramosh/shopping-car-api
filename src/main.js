@@ -1,5 +1,5 @@
 import './style.css';
-import { getAllProducts } from "./apis/products-api";
+import { getAllProducts } from "../src/apis/products-api";
 
 let listProducts = document.querySelector('.listProducts');
 
