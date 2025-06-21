@@ -223,7 +223,7 @@ main {
 /* SECCIÓN DE CARRUSEL */
 .hero-carousel {
     background-color: #eee;
-    min-height: 400px;
+    min-height: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
