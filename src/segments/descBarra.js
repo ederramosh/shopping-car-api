@@ -1,4 +1,4 @@
-import { getAllProducts} from "../apis/products-api";
+import { getAllProducts} from "../products-api";
 
 export async function descuentosProductos (){
   const productosArray = await getAllProducts();
