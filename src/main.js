@@ -5,6 +5,8 @@ let listProducts = document.querySelector('.listProducts');
 
 document.querySelector('.getProducts').addEventListener('click', async () => {
   const productsArray = await getAllProducts();
+  console.log("hace click");
+  
   
   productsArray.forEach(product => {
     console.log(product);
