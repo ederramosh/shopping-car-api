@@ -1,0 +1,88 @@
+
+
+/*COSAS PARA BARRA DE DESCUENTOS*/
+.descuentos-titulo {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 2rem 0 1rem 0;
+    text-align: left;
+    color: #575050;
+}
+
+.descuentosBarra {
+     display: flex;
+    gap: 1.5rem;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+}
+.descuentos-cards {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    padding: 1rem 1rem 1.5rem 1rem;
+    width: 220px;
+    max-width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    transition: transform 0.2s;
+    
+}
+
+
+.descuentos-img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin: 2.5rem 0 1rem 0;
+}
+
+
+.agregar-productos {
+    background: #a59254;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1.2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.7rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+
+.producto-precio{
+     display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.2rem;
+}
+
+.descuentos-precio-oferta{
+     font-size: 1.2rem;
+    font-weight: bold;
+    color: #222;
+}
+
+
+.descuentos-precio-base{
+    font-size: 1rem;
+    color: #888;
+    text-decoration: line-through;
+}
+
+.descuentos-nombre-item{
+        font-size: 1rem;
+    color: #494949;
+    margin-top: 0.5rem;
+    text-align: center;
+    min-height: 2.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

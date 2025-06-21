@@ -1,12 +1,13 @@
 import './style.css';
-
-//CARRUSEL STUFF
-import './carrusel/carrusel.js';
-import './carrusel/carrusel.css';
-
-
 // Importando las funciones de la API
 import { getAllProducts, getAllUsers } from "./apis/products-api";
+
+//CARRUSEL STUFF
+import './segments/carrusel.js';
+import './segments/styleCarrusel.css';
+import './segments/styleDesc.css';
+import {descuentosProductos} from './segments/descBarra.js';
+
 
 let listProducts = document.querySelector('.listProducts');
 
@@ -48,3 +49,7 @@ usersArray.forEach(user => {
   userContainer.appendChild(cardUsers);
 });
 
+
+
+//LLAMAR LA BARRA DE DESCUENTOS
+descuentosProductos();
