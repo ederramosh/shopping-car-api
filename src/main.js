@@ -1,67 +1,102 @@
 import './style.css';
-import './segments/carrusel.js'; 
-import './segments/styleCarrusel.css'; 
+import { getAllProducts } from "./apis/products-api";
 
-// Importando las funciones de la API
-import { getAllProducts, getAllUsers } from "./apis/products-api";
-
-let listProducts = document.querySelector('.products-grid');
+let listProducts = document.querySelector('.listProducts');
 
 document.querySelector('.getProducts').addEventListener('click', async () => {
   const productsArray = await getAllProducts();
   
-  listProducts.innerHTML = ''; 
-
   productsArray.forEach(product => {
+    console.log(product);
+    //solo es de meterle css
     listProducts.innerHTML += `
-      <div class="product-item">
-        <img src=${product.image} alt=${product.title}>
+      <div>
+        <img src=${product.image} alt=${product.id} >
         <h2>${product.title}</h2>
         <p>${product.description}</p>
-        <h4>$${product.price.toFixed(2)}</h4>
-        <button class="add-to-cart-btn">Añadir al Carrito</button>
+        <h4>${product.price}</h4>
       </div>
-    `;
+    `
   });
-});
 
-const userContainer = document.getElementById('user-cards-section'); 
+})
 
-if (userContainer) {
-    const usersArray = await getAllUsers();
-    userContainer.innerHTML = ''; 
-    
-    usersArray.forEach(user => {
-        const cardUsers = document.createElement('div');
-        cardUsers.classList.add('user-card');
-        cardUsers.innerHTML = `
-            <h3>${user.name.firstname.charAt(0).toUpperCase() + user.name.firstname.slice(1)} ${user.name.lastname.charAt(0).toUpperCase() + user.name.lastname.slice(1)}</h3>
-            <p>Email: ${user.email}</p>
-            <p>Phone: ${user.phone}</p>
-        `;
-        userContainer.appendChild(cardUsers);
-    });
+// Crear banners promocionales
+//Este carrusel no utiliza el API, son imagines prediseñadas.
+const promoBanners = [
+  {
+    img: "https://res.cloudinary.com/daoy46bpe/image/upload/v1750384038/promocar3_hfabs3.png",
+    link: "#"
+  },
+  {
+    img: "https://res.cloudinary.com/daoy46bpe/image/upload/v1750384036/promocar2_kg0tu6.png",
+    link: "#"
+  },
+  {
+    img: "https://res.cloudinary.com/daoy46bpe/image/upload/v1750384037/promocar1_wuajnf.png",
+    link: "#"
+  }
+];
+// Asegurarse de que el contenedor principal existe
+const promoDiv = document.createElement('div');
+promoDiv.id = 'promo-carousel'; // Agregar ID
+promoDiv.className = 'promo-carousel'; // Agregar clase
+//Posicion y timer
+let currentPromo = 0;
+let promoTimerId = null;
+
+function renderPromoBanner(index) {
+  currentPromo = index;
+  promoDiv.innerHTML = '';
+
+  const banner = promoBanners[index];
+
+  // Crear hyperlink
+  const link = document.createElement('a');
+  link.href = banner.link;
+
+  const img = document.createElement('img');
+  img.src = banner.img;
+  img.className = 'promo-img'; //  Agregar clase
+  link.appendChild(img);
+  promoDiv.appendChild(link);
+
+  // Left arrow
+  const leftBtn = document.createElement('button');
+  leftBtn.textContent = '◀';
+  leftBtn.className = 'promo-arrow promo-arrow-left'; //  Agregar clase
+  leftBtn.onclick = () => {
+    clearInterval(promoTimerId);
+    renderPromoBanner((currentPromo - 1 + promoBanners.length) % promoBanners.length);
+    startPromoTimer();
+  };
+  promoDiv.appendChild(leftBtn);
+
+  // Right arrow
+  const rightBtn = document.createElement('button');
+  rightBtn.textContent = '▶';
+  rightBtn.className = 'promo-arrow promo-arrow-right'; //  Agregar clase
+  rightBtn.onclick = () => {
+    clearInterval(promoTimerId);
+    renderPromoBanner((currentPromo + 1) % promoBanners.length);
+    startPromoTimer();
+  };
+  promoDiv.appendChild(rightBtn);
+}
+function nextPromoBanner() {
+  const next = (currentPromo + 1) % promoBanners.length;
+  renderPromoBanner(next);
 }
 
-// JavaScript para el menú hamburguesa
-document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const mainNav = document.querySelector('.main-nav');
+function startPromoTimer() {
+  promoTimerId = setInterval(nextPromoBanner, 10000);
+}
+// Insertar el carrusel promocional
+const mainContainer = document.getElementById('app');
+if (mainContainer && mainContainer.parentNode) {
+  mainContainer.parentNode.insertBefore(promoDiv, mainContainer);
+  renderPromoBanner(currentPromo);
+  startPromoTimer();
+}
 
-    if (menuToggle && mainNav) {
-        menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
-            mainNav.classList.toggle('active');
-        });
-    }
-
-    const navLinks = document.querySelectorAll('.nav-links .nav-link');
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (mainNav.classList.contains('active')) {
-                menuToggle.classList.remove('active');
-                mainNav.classList.remove('active');
-            }
-        });
-    });
-});
+//FIN DEL CARRUSEL DE IMAGENES
