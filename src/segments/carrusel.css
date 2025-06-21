@@ -1,15 +1,16 @@
-/* COSAS PARA EL CARRUSEL DE IMAGENES PRINCIPAL */
-/* Contenedor del carrusel*/
-.promo-carousel {
+.promo-carousel-content { 
     margin-bottom: 30px;
     position: relative;
     margin-left: 5rem;
     margin-right: 5rem;
+    width: 100%; 
+    height: 100%; 
 }
+
 /* Classe img para que encaje en la pantalla */
 .promo-img {
     width: 100%;
-    height: 100%;
+    height: 100%; 
     object-fit: cover;
 }
 /* Promo arrows */
@@ -25,6 +26,7 @@
     width: 75px;
     height: 75px;
     cursor: pointer;
+    z-index: 10; 
 }
 .promo-arrow-left {
     left: 15px;
@@ -32,4 +34,3 @@
 .promo-arrow-right {
     right: 15px;
 }
-/* FIN DE COSAS DE CARRUSEL PRINCIPAL */

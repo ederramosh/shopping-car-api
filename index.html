@@ -1,17 +1,117 @@
-<!doctype html>
-<html lang="en">
-  <head>
+<!DOCTYPE html>
+<html lang="es">
+<head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shopping Cart API</title>
-  </head>
-  <body>
-    <div id="app"></div>
+    <title>Tienda de Ropa - Estilo Urbano</title>
+    <link rel="stylesheet" href="./src/style.css">
+    </head>
+<body>
 
-    <div class="listProducts"></div>
-    <button class="getProducts">Mostrar Productos</button>
+    <header class="main-header">
+        <div class="header-top-bar">
+            <p>Envío GRATIS en pedidos superiores a $50! ✨</p>
+        </div>
+        <div class="header-main">
+            <div class="logo">
+                <a href="#">Tienda Urbana</a>
+            </div>
 
-    <script type="module" src="/src/main.js"></script>
-  </body>
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-link">Inicio</a></li>
+                    <li><a href="#" class="nav-link">Hombre</a></li>
+                    <li><a href="#" class="nav-link">Mujer</a></li>
+                    <li><a href="#" class="nav-link">Niños</a></li>
+                    <li><a href="#" class="nav-link">Novedades</a></li>
+                    <li><a href="#" class="nav-link">Ofertas</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-utilities">
+                <div class="search-box">
+                    <input type="text" placeholder="Buscar..." class="search-input">
+                    <button class="search-button">
+                        <img src="https://img.icons8.com/ios-glyphs/24/000000/search--v1.png" alt="Buscar">
+                    </button>
+                </div>
+                <a href="#" class="icon-link user-icon">
+                    <img src="https://img.icons8.com/ios-glyphs/24/000000/user--v1.png" alt="Usuario">
+                    <span class="icon-text">Cuenta</span>
+                </a>
+                <a href="#" class="icon-link cart-icon">
+                    <img src="https://img.icons8.com/ios-glyphs/24/000000/shopping-cart--v1.png" alt="Carrito">
+                    <span class="icon-text">Carrito (0)</span>
+                    </a>
+                <button class="menu-toggle" aria-label="Abrir menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-carousel">
+            <div class="carousel-container">
+                <p>Cargando carrusel...</p>
+            </div>
+        </section>
+
+        <section class="products-section">
+            <div class="section-header">
+                <h2>Nuestros Productos Recientes</h2>
+                <button class="getProducts">Cargar Más Productos</button>
+            </div>
+            <div class="listProducts products-grid">
+                <p>Haz clic en "Cargar Más Productos" para verlos.</p>
+            </div>
+        </section>
+
+        <section class="users-section">
+            <div class="section-header">
+                <h2>Conoce a Nuestros Usuarios</h2>
+            </div>
+            <div id="user-cards-section" class="user-list-container">
+                <p>Cargando usuarios...</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Acerca de Nosotros</h3>
+                <p>Somos tu tienda de ropa online favorita, ofreciendo lo último en moda y tendencias.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="#">Política de Privacidad</a></li>
+                    <li><a href="#">Términos y Condiciones</a></li>
+                    <li><a href="#">Preguntas Frecuentes</a></li>
+                    <li><a href="#">Envíos y Devoluciones</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contáctanos</h3>
+                <p>Email: info@tiendaurbana.com</p>
+                    <p>Tel: +503 2222-1111</p>
+                <div class="social-icons">
+                    <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/ffffff/facebook-new.png" alt="Facebook"></a>
+                    <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/ffffff/instagram-new.png" alt="Instagram"></a>
+                    <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/ffffff/twitter--v1.png" alt="Twitter"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Tienda Urbana. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="./src/main.js"></script>
+</body>
 </html>
