@@ -1,5 +1,5 @@
 import './style.css';
-import { getAllProducts } from "./products-api";
+import { getAllProducts, getAllUsers } from "./products-api";
 
 let listProducts = document.querySelector('.listProducts');
 
@@ -23,82 +23,32 @@ document.querySelector('.getProducts').addEventListener('click', async () => {
 
 })
 
-// Crear banners promocionales
-//Este carrusel no utiliza el API, son imagines prediseñadas.
-const promoBanners = [
-  {
-    img: "https://res.cloudinary.com/daoy46bpe/image/upload/v1750384038/promocar3_hfabs3.png",
-    link: "#"
-  },
-  {
-    img: "https://res.cloudinary.com/daoy46bpe/image/upload/v1750384036/promocar2_kg0tu6.png",
-    link: "#"
-  },
-  {
-    img: "https://res.cloudinary.com/daoy46bpe/image/upload/v1750384037/promocar1_wuajnf.png",
-    link: "#"
+// Cargar usuarios
+async function loadUsers() {
+  const userCardsSection = document.getElementById('user-cards-section');
+  try {
+    const users = await getAllUsers();
+    if (users && users.length > 0) {
+      userCardsSection.innerHTML = ''; // Limpiar mensaje "Cargando usuarios..."
+      users.forEach(user => {
+        const userCard = document.createElement('div');
+        userCard.className = 'user-card'; // Añadir clase para estilizar si es necesario
+        userCard.innerHTML = `
+          <h4>${user.name.firstname} ${user.name.lastname}</h4>
+          <p>Email: ${user.email}</p>
+          <p>Usuario: ${user.username}</p>
+        `;
+        userCardsSection.appendChild(userCard);
+      });
+    } else {
+      userCardsSection.innerHTML = '<p>No se encontraron usuarios.</p>';
+    }
+  } catch (error) {
+    console.error('Error al cargar usuarios:', error);
+    userCardsSection.innerHTML = '<p>Error al cargar los usuarios. Intente más tarde.</p>';
   }
-];
-// Asegurarse de que el contenedor principal existe
-const promoDiv = document.createElement('div');
-promoDiv.id = 'promo-carousel'; // Agregar ID
-promoDiv.className = 'promo-carousel'; // Agregar clase
-//Posicion y timer
-let currentPromo = 0;
-let promoTimerId = null;
-
-function renderPromoBanner(index) {
-  currentPromo = index;
-  promoDiv.innerHTML = '';
-
-  const banner = promoBanners[index];
-
-  // Crear hyperlink
-  const link = document.createElement('a');
-  link.href = banner.link;
-
-  const img = document.createElement('img');
-  img.src = banner.img;
-  img.className = 'promo-img'; //  Agregar clase
-  link.appendChild(img);
-  promoDiv.appendChild(link);
-
-  // Left arrow
-  const leftBtn = document.createElement('button');
-  leftBtn.textContent = '◀';
-  leftBtn.className = 'promo-arrow promo-arrow-left'; //  Agregar clase
-  leftBtn.onclick = () => {
-    clearInterval(promoTimerId);
-    renderPromoBanner((currentPromo - 1 + promoBanners.length) % promoBanners.length);
-    startPromoTimer();
-  };
-  promoDiv.appendChild(leftBtn);
-
-  // Right arrow
-  const rightBtn = document.createElement('button');
-  rightBtn.textContent = '▶';
-  rightBtn.className = 'promo-arrow promo-arrow-right'; //  Agregar clase
-  rightBtn.onclick = () => {
-    clearInterval(promoTimerId);
-    renderPromoBanner((currentPromo + 1) % promoBanners.length);
-    startPromoTimer();
-  };
-  promoDiv.appendChild(rightBtn);
-}
-function nextPromoBanner() {
-  const next = (currentPromo + 1) % promoBanners.length;
-  renderPromoBanner(next);
 }
 
-function startPromoTimer() {
-  promoTimerId = setInterval(nextPromoBanner, 10000);
-}
-// Insertar el carrusel promocional
-const mainContainer = document.getElementById('app');
-if (mainContainer && mainContainer.parentNode) {
-  mainContainer.parentNode.insertBefore(promoDiv, mainContainer);
-  renderPromoBanner(currentPromo);
-  startPromoTimer();
-}
-
-//FIN DEL CARRUSEL DE IMAGENES
+document.addEventListener('DOMContentLoaded', () => {
+  loadUsers();
+});
